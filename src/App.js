@@ -1,13 +1,15 @@
 import './App.css';
+import pokemons from './pokemon.json'
 
 function App() {
   return (
     <>
     <div style={{
-      marginTop: '1rem'
+      marginTop: '1rem',
+      padding:10
       
     }}>
-     <div className='title'>Search</div>
+     <div className='title'>Pokemon Search</div>
      <table width="100%">
       <thead>
         <tr>
@@ -17,10 +19,13 @@ function App() {
         
       </thead>
       <tbody>
-        <tr>
-        <td>Name 1</td>
-        <td>Type 1</td>
-        </tr>
+        {pokemons.slice(0,20).map(pokemon=>(
+           <tr key={pokemon.id}>
+           <td>{pokemon.name.english}</td>
+           <td>{pokemon.type.join(', ')}</td>
+           </tr>
+        ))}
+       
       
       </tbody>
      </table>
