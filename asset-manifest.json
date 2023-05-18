@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/reactlectures/static/css/main.073c9b0a.css",
+    "main.js": "/reactlectures/static/js/main.9e7527f7.js",
+    "static/js/787.bb3e3bb0.chunk.js": "/reactlectures/static/js/787.bb3e3bb0.chunk.js",
+    "static/media/logo.svg": "/reactlectures/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/reactlectures/index.html",
+    "main.073c9b0a.css.map": "/reactlectures/static/css/main.073c9b0a.css.map",
+    "main.9e7527f7.js.map": "/reactlectures/static/js/main.9e7527f7.js.map",
+    "787.bb3e3bb0.chunk.js.map": "/reactlectures/static/js/787.bb3e3bb0.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.9e7527f7.js"
+  ]
+}
