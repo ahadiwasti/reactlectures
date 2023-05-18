@@ -7,3 +7,8 @@ text-align: center;
 tr{
   text-align: left;
 }
+
+input{
+  font-size: larger;
+  width: 100%;
+}
