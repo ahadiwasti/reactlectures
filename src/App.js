@@ -1,5 +1,5 @@
 import './App.css';
-import PropTypes from 'prop-types'
+import PropTypes, { object } from 'prop-types'
 import pokemons from './pokemon.json'
 import React from 'react';
 
@@ -14,11 +14,32 @@ const PokemonRow = ({pokemon, onSelect})=>(
   );
 PokemonRow.propTypes={
   pokemon : PropTypes.shape({
-    name : PropTypes.string,
+
+    name : PropTypes.shape({
+      english:PropTypes.string,
+    }),
     type: PropTypes.arrayOf(PropTypes.string)
   }),
   onSelect: PropTypes.func
 }
+
+
+const PokemonDetails = ({name, base}) => (
+  <div>
+    <h1>{name.english}</h1>
+    <table>
+      <tbody>
+      {Object.keys(base).map((key)=>(
+        <tr key={key}>
+          <td>{key}</td>
+          <td>{base[key]}</td>
+        </tr>
+      ))}
+      </tbody>
+      
+    </table>
+  </div>
+)
 
 function App() {
   const [filterValue, filterSet] = React.useState("")
@@ -52,7 +73,7 @@ function App() {
       </thead>
       <tbody>
         {pokemons.slice(0,20).filter((pokemon)=> pokemon.name.english.toLowerCase().includes(filterValue.toLowerCase())).map(pokemon=>(
-           <PokemonRow pokemon={pokemon} key={pokemon.id} onSelect={(pokemon)=> setItem(pokemon.name.english)}/>
+           <PokemonRow pokemon={pokemon} key={pokemon.id} onSelect={(pokemon)=> setItem(pokemon)}/>
         ))}
       </tbody>
      </table>
@@ -62,9 +83,15 @@ function App() {
           <div>
           {selectedItem && (
             <div>
-              <h1>{selectedItem}</h1>
+              <h1>{selectedItem.name.english}</h1>
             </div>
           )}
+          </div>
+          <div>
+            {selectedItem && 
+              <PokemonDetails {...selectedItem} ></PokemonDetails>
+            }
+            
           </div>
      </div>
     </>  
