@@ -1,5 +1,5 @@
 import './App.css';
-import PropTypes, { object } from 'prop-types'
+import PropTypes from 'prop-types'
 import React from 'react';
 
 const PokemonRow = ({pokemon, onSelect})=>(
@@ -7,7 +7,7 @@ const PokemonRow = ({pokemon, onSelect})=>(
   <td>{pokemon.name.english}</td>
   <td>{pokemon.type.join(', ')}</td>
   <td>
-    <button onClick={()=>onSelect(pokemon)}>Select</button>
+    <button className='bg-green-400 p-5 rounded-md' onClick={()=>onSelect(pokemon)}>Select</button>
   </td>
   </tr>
   );
@@ -41,9 +41,9 @@ const PokemonDetails = ({name, base}) => (
 )
 
 function App() {
-  const [filterValue, filterSet] = React.useState("")
+  const [filterValue, filterSet] = React.useState('')
   const [pokemons, setPokemons] = React.useState([])
-  const [selectedItem, setItem] = React.useState("")
+  const [selectedItem, setItem] = React.useState(null)
 
   React.useEffect(() => {
     fetch("http://localhost:3000/reactlectures/pokemon.json")
@@ -62,15 +62,11 @@ function App() {
       padding:10
       
     }}>
-     <div className='title'>Pokemon Search</div>
+     <div className='text-3xl font-bold underline'>Pokemon Search</div>
      
-     <div style={{
-      display:"grid",
-      gridTemplateColumns: '70% 30%',
-      gridColumnsGap: "1rem"
-     }}>
+     <div className="grid grid-cols-2 gap-4">
       <div>
-      <input value={filterValue} 
+      <input className='bg-green-100 w-[100%] h-20 p-3 rounded-md' value={filterValue} 
      onChange={(evt)=>filterSet(evt.target.value)}
      />
        <table width="100%">
@@ -82,27 +78,21 @@ function App() {
         
       </thead>
       <tbody>
-        {pokemons.slice(0,20).filter((pokemon)=> pokemon.name.english.toLowerCase().includes(filterValue.toLowerCase())).map(pokemon=>(
+        {pokemons.slice(0,10).filter((pokemon)=> pokemon.name.english.toLowerCase().includes(filterValue.toLowerCase())).map(pokemon=>(
            <PokemonRow pokemon={pokemon} key={pokemon.id} onSelect={(pokemon)=> setItem(pokemon)}/>
         ))}
       </tbody>
      </table>
       </div>
      
-     </div>
-          <div>
-          {selectedItem && (
-            <div>
-              <h1>{selectedItem.name.english}</h1>
-            </div>
-          )}
-          </div>
           <div>
             {selectedItem && 
               <PokemonDetails {...selectedItem} ></PokemonDetails>
             }
             
           </div>
+     </div>
+        
      </div>
     </>  
   );
